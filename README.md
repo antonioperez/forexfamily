@@ -1,2 +1,2 @@
 # forexfamily
-the forex family internal app
+the forex family internal chat app
