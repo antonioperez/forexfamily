@@ -5255,16 +5255,7 @@ dd.project-people {
 .chat-view {
   z-index: 20012;
 }
-.chat-users,
-.chat-statistic {
-  margin-left: -30px;
-}
-@media (max-width: 992px) {
-  .chat-users,
-  .chat-statistic {
-    margin-left: 0;
-  }
-}
+
 .chat-view .ibox-content {
   padding: 0;
 }
@@ -7507,7 +7498,6 @@ body.rtls ul.notes li {
 }
 body.rtls .chat-users,
 body.rtls .chat-statistic {
-  margin-right: -30px;
   margin-left: auto;
 }
 body.rtls .dropdown-menu > li > a {
