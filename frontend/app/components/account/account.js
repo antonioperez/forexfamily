@@ -29,7 +29,7 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then(function (user) {
                     $cookies.put('user', user);
-                    $state.go('index.dashboard');
+                    $state.go('index.chat');
                 })
                 .catch(function (error) {
 
@@ -49,7 +49,7 @@
                 .then(function (user) {
                     sendEmailVerification();
                     $cookies.put('user', user);
-                    $state.go('index.dashboard');
+                    $state.go('index.chat');
                 })
                 .catch(function (error) {
                     var errorMessage = error.message;

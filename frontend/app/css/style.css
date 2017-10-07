@@ -5315,7 +5315,7 @@ dd.project-people {
 }
 .chat-users {
   overflow-y: auto;
-  height: 400px;
+  background-color: red;
 }
 .chat-message-form .form-group {
   margin-bottom: 0;

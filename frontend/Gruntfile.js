@@ -56,14 +56,14 @@ module.exports = function (grunt) {
                     optimization: 2
                 },
                 files: {
-                    "frontend/app/styles/style.css": "frontend/app/less/style.less"
+                    "<%= inspinia.app %>/styles/style.css": "<%= inspinia.app %>/less/style.less"
                 }
             }
         },
         // Watch for changes in live edit
         watch: {
             styles: {
-                files: ['frontend/app/less/**/*.less'],
+                files: ['<%= inspinia.app %>/less/**/*.less'],
                 tasks: ['less', 'copy:styles'],
                 options: {
                     nospawn: true,
@@ -219,7 +219,7 @@ module.exports = function (grunt) {
             }
         },
         useminPrepare: {
-            html: 'frontend/app/index.html',
+            html: '<%= inspinia.app %>/index.html',
             options: {
                 dest: 'dist'
             }

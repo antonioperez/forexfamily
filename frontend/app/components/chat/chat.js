@@ -2,7 +2,7 @@
 
   angular
     .module('app')
-    .controller('DashboardCtrl', [
+    .controller('ChatCtrl', [
       '$http',
       Ctrl
     ]);
