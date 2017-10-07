@@ -15,7 +15,7 @@
 
         var auth = firebase.auth();
         //demo info
-        $scope.email = "sigmasolutions@ecoverse.io";
+        $scope.email = "user@forexfamily.com";
         $scope.password = "demo123";
 
         var sendEmailVerification = function () {
