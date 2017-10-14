@@ -1,5 +1,20 @@
 <div class="row">
-  <nav class="navbar navbar-static-top white-bg m-b-0" role="navigation">
+  <nav class="navbar navbar-static-top white-bg m-b-0 " role="navigation">
+      <div class="col-xs-6">
+    <ul class="nav navbar-top-links pull-left " uib-dropdown>
+      <li uib-dropdown-toggle>
+        <a class="">
+            Public <i class="logout-dropdown icon ion-chevron-down"></i>
+        </a>
+      </li>
+      <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
+          <li class="visible-xs visible-sm"><a ui-sref="index.chat">David's</a></li>
+          <li class="visible-xs visible-sm" class="divider">Ted's</li>
+          <li><a ui-sref="index.chat">Dave's</a></li>
+      </ul>
+    </ul>   
+    </div>
+    <div class="col-xs-6">
     <ul class="nav navbar-top-links pull-right" uib-dropdown>
       <li uib-dropdown-toggle>
         <button class="display-inline">
@@ -15,6 +30,7 @@
           <li><a ui-sref="login">Logout</a></li>
       </ul>
     </ul>
+    </div>
   </nav>
 </div>
 <div class="row" data-ng-hide="true">
