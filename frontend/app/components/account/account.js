@@ -58,9 +58,30 @@
                 });
         }
 
+        $scope.socialLogin = function(provider) {
+            
+            switch(provider) {
+                case 'facebook':
+                    provider = new firebase.auth.FacebookAuthProvider();
+                    break;
+                case 'google':
+                    provider = new firebase.auth.GoogleAuthProvider();
+                    break;
+                case 'twitter':
+                    provider = new firebase.auth.TwitterAuthProvider();
+                    break;
+            }
+
+            auth.signInWithPopup(provider).then(function(user) {
+                console.log("Logged in as: " + user.uid);
+            }, function(error) {
+                console.error("Login failed: " + error);
+            });
+        }
+
 
         function sendPasswordReset(email) {
-            firebase.auth().sendPasswordResetEmail(email).then(function () {
+            auth.sendPasswordResetEmail(email).then(function () {
                 $scope.message = 'Password Reset Email Sent!';
             }).catch(function (error) {
                 var errorMessage = error.message;
