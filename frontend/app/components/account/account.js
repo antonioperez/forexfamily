@@ -27,22 +27,22 @@
         var signin = function (email, password) {
             // Sign in with email and pass.
             $state.go('index.chat');
-            // auth.signInWithEmailAndPassword(email, password)
-            //     .then(function (user) {
-            //         $cookies.put('user', user);
-            //         $state.go('index.chat');
-            //     })
-            //     .catch(function (error) {
+            auth.signInWithEmailAndPassword(email, password)
+                .then(function (user) {
+                    $cookies.put('user', user);
+                    $state.go('index.chat');
+                })
+                .catch(function (error) {
 
-            //         var errorCode = error.code;
-            //         var errorMessage = error.message;
-            //         if (errorCode === 'auth/wrong-password') {
-            //             console.log('Wrong password.');
-            //         } else {
-            //             console.log(errorMessage);
-            //         }
-            //         $scope.errorMessage = errorMessage;
-            //     });
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    if (errorCode === 'auth/wrong-password') {
+                        console.log('Wrong password.');
+                    } else {
+                        console.log(errorMessage);
+                    }
+                    $scope.errorMessage = errorMessage;
+                });
         }
 
         var signup = function (email, password) {
