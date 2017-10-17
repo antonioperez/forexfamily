@@ -3,9 +3,9 @@
     <div class="ibox chat-view">
       <div class="ibox-title">
         <small class="text-muted"></small>
-        <a class="js-bid-action btn btn-primary">
-            Exchange
-            <i class="fa fa-bitcoin"></i>
+        <a class="js-bid-action btn btn-primary" data-toggle="modal" data-target="#js-buysell-display">
+          Buy/Sell
+          <i class="fa fa-money"></i>
         </a>
       </div>
       <div class="ibox-content">
@@ -18,20 +18,22 @@
                   <a class="message-author" href="#"> Michael Smith </a>
                   <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
                   <span class="message-content">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                    </span>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                    aliquam erat volutpat.
+                  </span>
                 </div>
               </div>
               <div class="chat-message">
-                  <div class="message">
-                    <img class="message-avatar" src="components/layout/logo.png" alt="">
-                    <a class="message-author" href="#"> Michael Smith </a>
-                    <span class="message-date"> Mon Jan 26 2015 - 8:39:23AM </span>
-                    <span class="message-content">
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                      </span>
-                  </div>
+                <div class="message">
+                  <img class="message-avatar" src="components/layout/logo.png" alt="">
+                  <a class="message-author" href="#"> Michael Smith </a>
+                  <span class="message-date"> Mon Jan 26 2015 - 8:39:23AM </span>
+                  <span class="message-content">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                    aliquam erat volutpat.
+                  </span>
                 </div>
+              </div>
 
             </div>
           </div>
@@ -40,6 +42,72 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="js-buysell-display" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="user-actions">
+        <div class="text-center">
+          <h2>Currency Exchange Trade
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h2>
+        </div>
+        <form method="POST" action="" id="user-login-form">
+          <div class="alert alert-success alert-message" style="display:none" id="currencyAlert">
+            <button type="button" class="close" data-dismiss="alert">
+              <span>&times;</span>
+            </button>
+            <span class="message"></span>
+          </div>
+
+          <div class="form-group row">
+              <div class="col-xs-6">
+                <label for="user-currPair">Currency Pair</label>
+              </div>
+              <div class="col-xs-6">
+                <label for="user-tradeType">Buy/Sell</label>
+              </div>
+              <div class="col-xs-6">
+                <select class="form-control" id="user-currPair" name="currPair">
+                    <option value="N">USD/MX</option>
+                    <option value="M">USD/CAD</option>
+              </select>
+              </div>
+              <div class="col-xs-6">
+                <select class="form-control" id="user-shoeSize" name="tradeType">
+                    <option value="BUY">Buy</option>
+                    <option value="SELL">Sell</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-xs-6">
+                  <label for="user-priceStart">Price Start</label>
+                </div>
+                <div class="col-xs-6">
+                  <label for="user-priceEnd">Price End</label>
+                </div>
+                <div class="col-xs-6">
+                    <input class="form-control" type="number" min="0.01" step="0.01" name="priceStart" />
+                </div>
+                <div class="col-xs-6">
+                    <input class="form-control" type="number" min="0.02" step="0.01" name="priceEnd"/>
+                </div>
+              </div>
+
+            <div class="form-group">
+            <label for="user-message">Message</label>
+            <input type="email" class="form-control" id="user-message" name="text" required placeholder="Enter Your Message">
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary btn-lg" style="display: block; width: 100%;">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- <div class="small-chat-box ng-small-chat fadeInRight animated" ng-show="openChat">
