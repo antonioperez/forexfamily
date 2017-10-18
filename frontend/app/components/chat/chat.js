@@ -10,7 +10,11 @@
 
     function Ctrl ($http, $scope, $timeout) {
       var vm = this;
+      var auth = firebase.auth();
+      var storageRef = firebase.storage().ref();
       var database = firebase.database();
+      
+      vm.currentUser = auth.currentUser;
       vm.messages = {};
       
       var setMessage = function(data) {
@@ -24,31 +28,35 @@
 
       vm.loadMessages = function() {
         // Reference to the /messages/ database path.
+        var loadLimit = 12;
         this.messagesRef = database.ref('messages');
-      
-        // Make sure we remove all previous listeners.
         this.messagesRef.off();
-        // Loads the last 12 messages and listen for new ones.
-        this.messagesRef.limitToLast(12).on('child_added', setMessage);
-        this.messagesRef.limitToLast(12).on('child_changed', setMessage);
-
+        // Loads the last x messages and listen for new/edited ones.
+        this.messagesRef.limitToLast(loadLimit).on('child_added', setMessage);
+        this.messagesRef.limitToLast(loadLimit).on('child_changed', setMessage);
+        this.messagesRef.limitToLast(loadLimit).on('child_removed', setMessage);
       }
 
-      vm.saveMessage = function(e) {
-        e.preventDefault();
+      vm.saveMessage = function(messageInput) {
+        var currentUser = vm.currentUser;
+        console.log(currentUser);
         // Check that the user entered a message and is signed in.
-        if (this.messageInput.value && this.checkSignedInWithMessage()) {
-          var currentUser = this.auth.currentUser;
+        if (messageInput && currentUser) {
           // Add a new message entry to the Firebase Database.
+          //UTC
+          var milliseconds = Math.floor((new Date()).getTime() / 1000)
+          this.messagesRef = database.ref('messages');
           this.messagesRef.push({
-            name: currentUser.displayName,
-            text: this.messageInput.value,
-            photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
+            name: currentUser.email,
+            text: messageInput,
+            time: milliseconds,
+            photoUrl: currentUser.photoURL || '/components/layout/logo.png'
+
           }).then(function() {
             // Clear message text field and SEND button state.
-            FriendlyChat.resetMaterialTextfield(this.messageInput);
-            this.toggleButton();
-          }.bind(this)).catch(function(error) {
+            // FriendlyChat.resetMaterialTextfield(this.messageInput);
+            // this.toggleButton();
+          }).catch(function(error) {
             console.error('Error writing new message to Firebase Database', error);
           });
         }
