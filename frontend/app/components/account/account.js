@@ -33,14 +33,12 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then(function (user) {
                     $cookies.put('user', user);
-                    console.log(user);
                     self.database.ref('user/' + user.uid).update({
                         online : true
                     })
                     $state.go('index.chat');
                 })
                 .catch(function (error) {
-
                     var errorCode = error.code;
                     var errorMessage = error.message;
                     if (errorCode === 'auth/wrong-password') {
@@ -146,10 +144,7 @@
         }
 
         $scope.signOut = function () {
-            console.log(auth.currentUser);
-
             if (auth.currentUser) {
-                console.log(auth.currentUser);
                 self.database.ref('user/' + auth.currentUser.uid).update({
                     online : false
                 })
@@ -157,8 +152,6 @@
                 $cookies.remove('user');
                 $state.go('login');
             }
-            
         }
-
     }
 })();

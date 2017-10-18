@@ -27,7 +27,7 @@
       }
 
       if (!fUser) {
-        if (toState.name !== 'login') {
+        if (toState.name !== 'login' && toState.name !== 'register') {
           evt.preventDefault();
           $state.go('login');
         }
