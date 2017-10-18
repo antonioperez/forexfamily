@@ -58,9 +58,10 @@
                     user.updateProfile({
                         displayName : username
                     }) 
+
                     self.database.ref('user/' + user.uid).set({
                         online : true, 
-                        username : user.displayName,
+                        username : username,
                         likes : 0
                     }) 
                     $state.go('index.chat');

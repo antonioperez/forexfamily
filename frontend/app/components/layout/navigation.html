@@ -12,7 +12,7 @@
         <div class="users-list">
           <div class="chat-user" data-ng-repeat="(key, user) in chat.users">
             <div class="chat-user-name">
-              <a href="#">Karl Jordan<span id="score#123">(10)</span></a>
+              <a href="#" ng-class="{'active': user.online}" >{{user.username}}&nbsp;<span ng-show = "user.likes > 0">({{user.likes}})</span></a>
             </div>
           </div>
         </div>
