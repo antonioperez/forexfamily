@@ -34,8 +34,8 @@
                 .then(function (user) {
                     $cookies.put('user', user);
                     console.log(user);
-                    self.database.ref('user/' + user.uid).set({
-                        online : true,
+                    self.database.ref('user/' + user.uid).update({
+                        online : true
                     })
                     $state.go('index.chat');
                 })
@@ -62,6 +62,8 @@
                     }) 
                     self.database.ref('user/' + user.uid).set({
                         online : true, 
+                        username : user.displayName,
+                        likes : 0
                     }) 
                     $state.go('index.chat');
                 })
@@ -148,8 +150,8 @@
 
             if (auth.currentUser) {
                 console.log(auth.currentUser);
-                self.database.ref('user/' + auth.currentUser.uid).set({
-                    online : false, 
+                self.database.ref('user/' + auth.currentUser.uid).update({
+                    online : false
                 })
                 auth.signOut();
                 $cookies.remove('user');
