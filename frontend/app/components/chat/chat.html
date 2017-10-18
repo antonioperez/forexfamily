@@ -17,9 +17,7 @@
                   <img class="message-avatar" ng-hide="message.photoUrl == null" src="{{message.photoUrl}}" alt="">
                   <a class="message-author" href="#"> {{message.name}} </a>
                   <span class="message-date"> {{message.time * 1000 | date:'MM/dd/yy h:mm:ss a'}}  </span>
-                  <span class="message-content">
-                    {{message.text}}
-                  </span>
+                  <span class="message-content" ng-bind-html="message.text"></span>
                 </div>
               </div>
             </div>
