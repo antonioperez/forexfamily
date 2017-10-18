@@ -6,8 +6,8 @@
 
   function MainCtrl() {
     var vm = this;
-    
     vm.userName = 'Jon Snow';
+    
   }
 
 })();

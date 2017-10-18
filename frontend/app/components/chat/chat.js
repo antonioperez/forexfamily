@@ -9,24 +9,23 @@
     ]);
 
     function Ctrl ($http, $scope, $timeout) {
-      var vm = this;
+      var self = this;
       var auth = firebase.auth();
       var storageRef = firebase.storage().ref();
       var database = firebase.database();
       
-      vm.currentUser = auth.currentUser;
-      vm.messages = {};
+      self.currentUser = auth.currentUser;
+      self.messages = {};
       
       var setMessage = function(data) {
         $timeout(function(){
           var val = data.val();
           var key = data.key;
-          vm.messages[key] = val;
-          console.log(vm.messages);
+          self.messages[key] = val;
         },0);
       }
 
-      vm.loadMessages = function() {
+      self.loadMessages = function() {
         // Reference to the /messages/ database path.
         var loadLimit = 12;
         this.messagesRef = database.ref('messages');
@@ -37,8 +36,8 @@
         this.messagesRef.limitToLast(loadLimit).on('child_removed', setMessage);
       }
 
-      vm.saveMessage = function(messageInput) {
-        var currentUser = vm.currentUser;
+      self.saveMessage = function(messageInput) {
+        var currentUser = self.currentUser;
         console.log(currentUser);
         // Check that the user entered a message and is signed in.
         if (messageInput && currentUser) {
@@ -47,7 +46,8 @@
           var milliseconds = Math.floor((new Date()).getTime() / 1000)
           this.messagesRef = database.ref('messages');
           this.messagesRef.push({
-            name: currentUser.email,
+            userid : currentUser.uid,
+            name: currentUser.displayName,
             text: messageInput,
             time: milliseconds,
             photoUrl: currentUser.photoURL || '/components/layout/logo.png'
@@ -62,7 +62,7 @@
         }
       };
 
-      vm.loadMessages();
+      self.loadMessages();
 
     }
 

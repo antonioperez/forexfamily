@@ -28,7 +28,7 @@
       <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
           <li class="visible-xs visible-sm"><a ui-sref="index.chat">Chat</a></li>
           <li class="visible-xs visible-sm" class="divider"></li>
-          <li><a ui-sref="login">Logout</a></li>
+          <li ng-controller="AccountCtrl"><a ng-click="signOut()">Logout</a></li>
       </ul>
     </ul>
     </div>

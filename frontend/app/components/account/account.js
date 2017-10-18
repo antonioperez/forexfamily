@@ -14,6 +14,9 @@
     function Ctrl($http, $scope, $location, $state, $cookies) {
 
         var auth = firebase.auth();
+        var self = this;
+
+        self.database = firebase.database();
         //demo info
         $scope.email = "user@forexfamily.com";
         $scope.password = "demo123";
@@ -30,6 +33,10 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then(function (user) {
                     $cookies.put('user', user);
+                    console.log(user);
+                    self.database.ref('user/' + user.uid).set({
+                        online : true,
+                    })
                     $state.go('index.chat');
                 })
                 .catch(function (error) {
@@ -45,11 +52,17 @@
                 });
         }
 
-        var signup = function (email, password) {
+        var signup = function (email, password, username) {
             auth.createUserWithEmailAndPassword(email, password)
                 .then(function (user) {
                     sendEmailVerification();
                     $cookies.put('user', user);
+                    user.updateProfile({
+                        displayName : username
+                    }) 
+                    self.database.ref('user/' + user.uid).set({
+                        online : true, 
+                    }) 
                     $state.go('index.chat');
                 })
                 .catch(function (error) {
@@ -117,6 +130,7 @@
         $scope.signUp = function () {
             $scope.password = $scope.password.trim();
             $scope.email = $scope.email.trim();
+            $scope.username = $scope.username.trim();
             if ($scope.email.length < 1) {
                 alert('Please enter an email address.');
                 return;
@@ -126,14 +140,20 @@
                 return;
             }
             // Sign in with email and pass.
-            signup($scope.email, $scope.password);
+            signup($scope.email, $scope.password, $scope.username);
         }
 
         $scope.signOut = function () {
+            console.log(auth.currentUser);
+
             if (auth.currentUser) {
+                console.log(auth.currentUser);
+                self.database.ref('user/' + auth.currentUser.uid).set({
+                    online : false, 
+                })
                 auth.signOut();
                 $cookies.remove('user');
-                $state.go('index.login');
+                $state.go('login');
             }
             
         }
