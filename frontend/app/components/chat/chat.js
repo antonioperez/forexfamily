@@ -4,27 +4,34 @@
     .module('app')
     .controller('ChatCtrl', [
       '$http',
-      '$scope',
+      '$scope', '$timeout',
       Ctrl
     ]);
 
-    function Ctrl ($http, $scope) {
+    function Ctrl ($http, $scope, $timeout) {
       var vm = this;
       var database = firebase.database();
+      vm.messages = {};
       
+      var setMessage = function(data) {
+        $timeout(function(){
+          var val = data.val();
+          var key = data.key;
+          vm.messages[key] = val;
+          console.log(vm.messages);
+        },0);
+      }
+
       vm.loadMessages = function() {
         // Reference to the /messages/ database path.
         this.messagesRef = database.ref('messages');
+      
         // Make sure we remove all previous listeners.
         this.messagesRef.off();
-      
         // Loads the last 12 messages and listen for new ones.
-        var setMessage = function(data) {
-          var val = data.val();
-          console.log(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
-        }.bind(this);
         this.messagesRef.limitToLast(12).on('child_added', setMessage);
         this.messagesRef.limitToLast(12).on('child_changed', setMessage);
+
       }
 
       vm.saveMessage = function(e) {

@@ -12,25 +12,13 @@
         <div class="row">
           <div class="col-md-12 ">
             <div class="chat-discussion baby-blue-bg">
-              <div class="chat-message">
-                <div class="message">
-                  <img class="message-avatar" src="components/layout/logo.png" alt="">
-                  <a class="message-author" href="#"> Michael Smith </a>
-                  <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
+              <div class="chat-message" >
+                <div class="message" data-ng-repeat="(key, message) in chat.messages">
+                  <img class="message-avatar" ng-hide="message.imagePath == null" src="components/layout/logo.png" alt="">
+                  <a class="message-author" href="#"> {{message.name}} </a>
+                  <span class="message-date"> {{message.time * 1000 | date:'yyyy-MM-dd HH:mm:ss'}}  </span>
                   <span class="message-content">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                    aliquam erat volutpat.
-                  </span>
-                </div>
-              </div>
-              <div class="chat-message">
-                <div class="message">
-                  <img class="message-avatar" src="components/layout/logo.png" alt="">
-                  <a class="message-author" href="#"> Michael Smith </a>
-                  <span class="message-date"> Mon Jan 26 2015 - 8:39:23AM </span>
-                  <span class="message-content">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                    aliquam erat volutpat.
+                    {{message.text}}
                   </span>
                 </div>
               </div>
