@@ -4,13 +4,13 @@
       <div align="center">
         <img class="img-responsive" src="components/layout/logo.png">
       </div>
-      <div class="chat-users" ng-controller="ChatCtrl as chat">
+      <div class="chat-users" ng-controller="ChatUsersCtrl as chatusers">
         <div class="form-group">
           <br>
           <input type="text" class="form-control" placeholder="looking for someone?">
         </div>
         <div class="users-list">
-          <div class="chat-user" data-ng-repeat="(key, user) in chat.users">
+          <div class="chat-user" data-ng-repeat="(key, user) in chatusers.users">
             <div class="chat-user-name">
               <a href="#" ng-class="{'active': user.online}" >{{user.username}}&nbsp;<span ng-show = "user.likes > 0">({{user.likes}})</span></a>
             </div>
