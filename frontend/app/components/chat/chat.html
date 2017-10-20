@@ -11,7 +11,7 @@
       <div class="ibox-content">
         <div class="row">
           <div class="col-md-12 ">
-            <div class="chat-discussion baby-blue-bg">
+            <div class="chat-discussion baby-blue-bg" id="chat-discussion-view" scroll-glue >
               <div class="chat-message" >
                 <div class="message" data-ng-repeat="(key, message) in chat.messages">
                   <img class="message-avatar" ng-hide="message.photoUrl == null" src="{{message.photoUrl}}" alt="">

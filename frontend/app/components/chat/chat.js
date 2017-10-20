@@ -22,7 +22,9 @@
           var val = data.val();
           var key = data.key;
           self.messages[key] = val;
+          
         },0);
+        
       }
 
       self.loadMessages = function() {
@@ -34,6 +36,7 @@
         this.messagesRef.limitToLast(loadLimit).on('child_added', setMessage);
         this.messagesRef.limitToLast(loadLimit).on('child_changed', setMessage);
         this.messagesRef.limitToLast(loadLimit).on('child_removed', setMessage);
+        
       }
 
       self.loadMessages();

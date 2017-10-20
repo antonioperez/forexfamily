@@ -7,6 +7,7 @@
     'angularFileUpload',
     'datePicker',
     'ngSanitize',
-    'ngCookies'
+    'ngCookies',
+    'luegg.directives'
   ]);
 })();

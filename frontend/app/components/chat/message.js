@@ -23,7 +23,6 @@
             messageInput = textfield.summernote('code');
             var plainText = $(messageInput).text();
 
-            console.log(plainText);
             // Check that the user entered a message and is signed in.
             if (messageInput && currentUser && plainText.length > 0) {
               // Add a new message entry to the Firebase Database.
