@@ -13,8 +13,15 @@
           var auth = firebase.auth();
           var database = firebase.database();
           
-          self.currentUser = auth.currentUser;
+          
           self.rooms = {};
+
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                self.currentUser = user;
+                self.userName = user.displayName;
+            }
+          });
           
           var setRooms = function(data) {
             $timeout(function(){

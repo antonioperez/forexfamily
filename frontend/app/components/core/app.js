@@ -5,9 +5,12 @@
     .controller('MainCtrl', MainCtrl);
 
   function MainCtrl() {
-    var vm = this;
-    vm.userName = 'Jon Snow';
     
+    var self = this;
+    var auth = firebase.auth();
+
+    self.currentUser = auth.currentUser;
+       
   }
 
 })();

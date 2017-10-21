@@ -1,34 +1,33 @@
 <div class="" ng-controller="ChatRoomsCtrl as chatRooms">
   <nav class="navbar navbar-static-top white-bg m-b-0 " role="navigation">
     <div class="col-xs-6">
-    <span minimaliza-sidebar></span>
-    <ul class="nav navbar-top-links pull-left " uib-dropdown>
-      <li uib-dropdown-toggle>
-        <a class="">
-            Public <i class="logout-dropdown icon ion-chevron-down"></i>
-        </a>
-      </li>
-      <ul uib-dropdown-menu class="animated fadeInRight m-t-xs" >
-          <li data-ng-repeat="(key, room) in chatRooms.rooms"><a ui-sref="index.chat">{{room.text}}</a></li>
-      </ul>
-    </ul>   
+      <span minimaliza-sidebar></span>
+      <ul class="nav navbar-top-links pull-left " uib-dropdown>
+        <li uib-dropdown-toggle>
+          <a class="">
+              Public <i class="logout-dropdown icon ion-chevron-down"></i>
+          </a>
+        </li>
+        <ul uib-dropdown-menu class="animated fadeInRight m-t-xs" >
+            <li data-ng-repeat="(key, room) in chatRooms.rooms"><a ui-sref="index.chat">{{room.text}}</a></li>
+        </ul>
+      </ul>   
     </div>
     <div class="col-xs-6">
-    <ul class="nav navbar-top-links pull-right" uib-dropdown>
-      <li uib-dropdown-toggle>
-        <button class="display-inline">
-          JS
-        </button>
-        <a class="display-inline">
-          Jon Snow <i class="logout-dropdown icon ion-chevron-down"></i>
-        </a>
-      </li>
-      <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
-          <li class="visible-xs visible-sm"><a ui-sref="index.chat">Chat</a></li>
-          <li class="visible-xs visible-sm" class="divider"></li>
-          <li ng-controller="AccountCtrl"><a ng-click="signOut()">Logout</a></li>
+      <ul class="nav navbar-top-links pull-right" uib-dropdown>
+        <li uib-dropdown-toggle>
+          <img class="message-avatar" ng-show="chatRooms.currentUser.photoURL" ng-src="{{chatRooms.currentUser.photoURL}}" alt="">
+          <a >
+            {{chatRooms.currentUser.displayName}} <i class="logout-dropdown icon ion-chevron-down"></i>
+          </a>
+        </li>
+        <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
+            <li class="visible-xs visible-sm"><a ui-sref="index.chat">Profile</a></li>
+            <li class="visible-xs visible-sm"><a ui-sref="index.chat">Chat</a></li>
+            <li class="visible-xs visible-sm" class="divider"></li>
+            <li ng-controller="AccountCtrl"><a ng-click="signOut()">Logout</a></li>
+        </ul>
       </ul>
-    </ul>
     </div>
   </nav>
 </div>
