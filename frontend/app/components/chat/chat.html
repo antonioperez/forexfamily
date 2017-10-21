@@ -14,7 +14,7 @@
             <div class="chat-discussion baby-blue-bg" id="chat-discussion-view" scroll-glue >
               <div class="chat-message" >
                 <div class="message" data-ng-repeat="(key, message) in chat.messages">
-                  <img class="message-avatar" ng-hide="message.photoUrl == null" src="{{message.photoUrl}}" alt="">
+                  <img class="message-avatar" ng-show="message.photoUrl" ng-src="{{message.photoUrl}}" alt="">
                   <a class="message-author" href="#"> {{message.name}} </a>
                   <span class="message-date"> {{message.time * 1000 | date:'MM/dd/yy h:mm:ss a'}}  </span>
                   <span class="message-content" ng-bind-html="message.text"></span>
