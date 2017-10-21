@@ -1,4 +1,4 @@
-<div class="">
+<div class="" ng-controller="ChatRoomsCtrl as chatRooms">
   <nav class="navbar navbar-static-top white-bg m-b-0 " role="navigation">
     <div class="col-xs-6">
     <span minimaliza-sidebar></span>
@@ -8,10 +8,8 @@
             Public <i class="logout-dropdown icon ion-chevron-down"></i>
         </a>
       </li>
-      <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
-          <li ><a ui-sref="index.chat">David's</a></li>
-          <li ><a ui-sref="index.chat">Ted's</a></li>
-          <li><a ui-sref="index.chat">Dave's</a></li>
+      <ul uib-dropdown-menu class="animated fadeInRight m-t-xs" >
+          <li data-ng-repeat="(key, room) in chatRooms.rooms"><a ui-sref="index.chat">{{room.text}}</a></li>
       </ul>
     </ul>   
     </div>
