@@ -21,17 +21,20 @@
   function statesConfig ($rootScope, $state, $cookies) {
     $rootScope.$on('$stateChangeStart', function (evt, toState, toParams) {
       var fUser = firebase.auth().currentUser;
-      var user = $cookies.get('user');
-      if (user != null) {
-        fUser = user;
-      }
+      
 
-      if (!fUser) {
-        if (toState.name !== 'login' && toState.name !== 'register') {
-          evt.preventDefault();
-          $state.go('login');
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          
+
+        } else {
+          if (toState.name !== 'login' && toState.name !== 'register') {
+            evt.preventDefault();
+            $state.go('login');
+          }
         }
-      } 
+      });
+
     });
   }
 
