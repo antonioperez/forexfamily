@@ -8,8 +8,8 @@
                         <strong>{{ item.file.name }}</strong>
                     </span>
                     <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess" >
-                        <span class="glyphicon glyphicon-upload"></span> Upload
-                    </button><br><br>
+                        <span class="glyphicon glyphicon-upload"></span> Upload 
+                    </button> <span ng-show="chatMessage.uploader.progress">{{chatMessage.uploader.progress}}%</span> <br><br>
                 </div>
             </div>
             <div class="row">

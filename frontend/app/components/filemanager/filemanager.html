@@ -27,7 +27,7 @@
                             <button type="button" class="btn btn-default btn-s" onclick="$('#js-file-selector').click();">
                                     <span class="glyphicon glyphicon-upload"></span> Select Files
                                 </button>
-                            <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
                                     <span class="glyphicon glyphicon-upload"></span> Upload all
                                 </button>
                             <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
@@ -57,9 +57,7 @@
                                         <button type="button" class="btn btn-danger btn-xs text-center" ng-click="item.remove()">
                                             <span class="glyphicon glyphicon-trash"></span>
                                     </button>
-
                                     <a target="_blank" href="{{item.downloadUrl}}" class="btn btn-success btn-xs text-center downloadButton" ><span class="glyphicon glyphicon-download"></span></a>
-
                                     </td>
                                 </tr>
                             </tbody>

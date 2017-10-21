@@ -21,16 +21,16 @@
     self.saveMessage = function (message) {
 
       var currentUser = self.currentUser;
-      console.log(currentUser);
-
+      
       var textfield = $('#summernote');
       messageInput = textfield.summernote('code');
       var plainText = $(messageInput).text();
 
       if (message) {
         messageInput = message;
+        plainText = message;
       }
-
+      
       // Check that the user entered a message and is signed in.
       if (messageInput && currentUser && plainText.length > 0) {
         // Add a new message entry to the Firebase Database.
@@ -64,29 +64,37 @@
         downloadUrl: downloadUrl,
         lastModified: lastModified
       });
-      self.saveMessage(downloadUrl);
-      console.log(downloadUrl);
+
+      var mess = '<a target="_blank" href="'+downloadUrl+'" class="downloadLink" ><strong >'+filename+'</strong></a>';
+      self.saveMessage(mess);
     }
 
     self.uploader.uploadItem = function (value) {
 
       //HAD TO OVERWRITE EXISTING UPLOAD ITEM FUNCTION. 
       //BECAUSE IT IS SENDING TO A LOCAL PORT/URL. NEED TO SEND TO FIREBASE INSTEAD
-      var self = this;
-      var file = value._file;
-      console.log("hello");
+
+      //move to fancy hash
+      var hash = (Math.random()*1e32).toString(36);
       
-      storageRef.child(user.uid + '/' + file.name).put(file).then(function (snapshot) {
-        console.log("upload");
+      var currentUser = self.currentUser;
+      var vm = this;
+      var file = value._file;
+      
+      console.log(currentUser);
+      console.log(hash);
+      storageRef.child('user/'+ currentUser.uid + '/' + hash).put(file).then(function (snapshot) {
+
         var downloadURL = snapshot.downloadURL;
         item.isSuccess = true;
         item.isCancel = false;
         item.isError = false;
-        writeUserData(user.uid, file.name, file.size, downloadURL, file.lastModified);
-        self._render();
+        writeUserData(currentUser.uid, file.name, file.size, downloadURL, file.lastModified);
+        vm.clearQueue();
+        vm._render();
 
       }, function (error) {
-        
+
         console.log(error);
       });
 
@@ -104,6 +112,7 @@
       item.isUploading = true;
       this.isUploading = true;
       this[transport](item);
+      this.clearQueue();
       this._render();
     };
   }
