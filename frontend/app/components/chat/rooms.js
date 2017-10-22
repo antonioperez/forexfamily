@@ -4,25 +4,18 @@
         .module('app')
         .controller('ChatRoomsCtrl', [
           '$http',
-          '$scope', '$timeout',
+          '$scope', '$timeout', 'chatservice',
           Ctrl
         ]);
     
-        function Ctrl ($http, $scope, $timeout) {
+        function Ctrl ($http, $scope, $timeout, chatservice) {
           var self = this;
-          var auth = firebase.auth();
-          var database = firebase.database();
-          
+          var auth = chatservice.auth;
+          var storageRef = chatservice.storageRef;
+          var database = chatservice.database;
+          self.currentUser = database.currentUser;
           
           self.rooms = {};
-
-          firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                self.currentUser = user;
-                self.userName = user.displayName;
-            }
-          });
-          
           var setRooms = function(data) {
             $timeout(function(){
               var val = data.val();

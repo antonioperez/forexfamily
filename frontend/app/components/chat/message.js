@@ -6,22 +6,22 @@
       '$http',
       '$timeout',
       'FileUploader',
+      'chatservice',
       Ctrl
     ]);
 
-  function Ctrl($http, $timeout, FileUploader) {
+  function Ctrl($http, $timeout, FileUploader, chatservice) {
     var self = this;
 
     self.uploader = new FileUploader();
-    var auth = firebase.auth();
-    var storageRef = firebase.storage().ref();
-    var database = firebase.database();
-    self.currentUser = auth.currentUser;
+    var auth = chatservice.auth;
+    var storageRef = chatservice.storageRef;
+    var database = chatservice.database;
+    self.currentUser = database.currentUser;
 
     self.saveMessage = function (message) {
 
       var currentUser = self.currentUser;
-      
       var textfield = $('#summernote');
       messageInput = textfield.summernote('code');
       var plainText = $(messageInput).text();
@@ -76,13 +76,10 @@
 
       //move to fancy hash
       var hash = (Math.random()*1e32).toString(36);
-      
       var currentUser = self.currentUser;
       var vm = this;
       var file = value._file;
       
-      console.log(currentUser);
-      console.log(hash);
       storageRef.child('user/'+ currentUser.uid + '/' + hash).put(file).then(function (snapshot) {
 
         var downloadURL = snapshot.downloadURL;

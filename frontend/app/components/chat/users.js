@@ -4,17 +4,17 @@
         .module('app')
         .controller('ChatUsersCtrl', [
           '$http',
-          '$scope', '$timeout',
+          '$scope', '$timeout', 'chatservice',
           Ctrl
         ]);
     
-        function Ctrl ($http, $scope, $timeout) {
+        function Ctrl ($http, $scope, $timeout, chatservice) {
           var self = this;
-          var auth = firebase.auth();
-          var storageRef = firebase.storage().ref();
-          var database = firebase.database();
-          
-          self.currentUser = auth.currentUser;
+          var auth = chatservice.auth;
+          var storageRef = chatservice.storageRef;
+          var database = chatservice.database;
+      
+          self.currentUser = database.currentUser;
           self.messages = {};
           self.users = {};
               
