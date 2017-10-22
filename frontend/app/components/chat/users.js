@@ -13,8 +13,8 @@
           var auth = chatservice.auth;
           var storageRef = chatservice.storageRef;
           var database = chatservice.database;
-      
-          self.currentUser = database.currentUser;
+
+          self.currentUser = chatservice.currentUser;
           self.messages = {};
           self.users = {};
               

@@ -1,24 +1,26 @@
-<div class="" ng-controller="ChatRoomsCtrl as chatRooms">
+<div class="" ng-controller="ChatRoomCtrl as chatRoom">
   <nav class="navbar navbar-static-top white-bg m-b-0 " role="navigation">
     <div class="col-xs-6">
       <span minimaliza-sidebar></span>
       <ul class="nav navbar-top-links pull-left " uib-dropdown>
         <li uib-dropdown-toggle>
           <a class="">
-              Public <i class="logout-dropdown icon ion-chevron-down"></i>
+              {{chatRoom.activeRoom}} <i class="logout-dropdown icon ion-chevron-down"></i>
           </a>
         </li>
         <ul uib-dropdown-menu class="animated fadeInRight m-t-xs" >
-            <li data-ng-repeat="(key, room) in chatRooms.rooms"><a ui-sref="index.chat">{{room.text}}</a></li>
+            <li data-ng-repeat="(key, room) in chatRoom.rooms">
+              <a ng-if="room.text !== chatRoom.activeRoom" ui-sref="index.chat">{{room.text}}</a>
+            </li>
         </ul>
       </ul>   
     </div>
     <div class="col-xs-6">
       <ul class="nav navbar-top-links pull-right" uib-dropdown>
         <li uib-dropdown-toggle>
-          <img class="message-avatar" ng-show="chatRooms.currentUser.photoURL" ng-src="{{chatRooms.currentUser.photoURL}}" alt="">
+          <img class="message-avatar" ng-show="chatRoom.currentUser.photoURL" ng-src="{{chatRoom.currentUser.photoURL}}" alt="">
           <a >
-            {{chatRooms.currentUser.displayName}} <i class="logout-dropdown icon ion-chevron-down"></i>
+            {{chatRoom.currentUser.displayName}} <i class="logout-dropdown icon ion-chevron-down"></i>
           </a>
         </li>
         <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">

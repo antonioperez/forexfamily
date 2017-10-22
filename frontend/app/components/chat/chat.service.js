@@ -16,11 +16,11 @@ angular.module('app')
           });
         
 
-        self.getChat = function () {
+        self.getActiveChat = function () {
             return activeChat;
         }
 
-        self.setChat = function (value) {
+        self.setActiveChat = function (value) {
             activeChat = value;
         }
 

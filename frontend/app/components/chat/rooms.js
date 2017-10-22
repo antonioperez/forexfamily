@@ -2,7 +2,7 @@
     
       angular
         .module('app')
-        .controller('ChatRoomsCtrl', [
+        .controller('ChatRoomCtrl', [
           '$http',
           '$scope', '$timeout', 'chatservice',
           Ctrl
@@ -13,7 +13,8 @@
           var auth = chatservice.auth;
           var storageRef = chatservice.storageRef;
           var database = chatservice.database;
-          self.currentUser = database.currentUser;
+          self.currentUser = chatservice.currentUser;
+          self.activeRoom = chatservice.getActiveChat();
           
           self.rooms = {};
           var setRooms = function(data) {
