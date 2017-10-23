@@ -10,7 +10,7 @@
         </li>
         <ul uib-dropdown-menu class="animated fadeInRight m-t-xs" >
             <li data-ng-repeat="(key, room) in chatRoom.rooms">
-              <a ng-if="room.name !== chatRoom.activeRoom.name" ui-sref="index.chat">{{room.name}}</a>
+              <a ng-show="room.name !== chatRoom.activeRoom.name" ng-click = "chatRoom.changeRooms(room.name);" ui-sref="index.chat">{{room.name}}</a>
             </li>
         </ul>
       </ul>   

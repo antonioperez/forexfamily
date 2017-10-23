@@ -5,12 +5,13 @@
     .controller('ChatMessageCtrl', [
       '$http',
       '$timeout',
+      '$rootScope',
       'FileUploader',
       'chatservice',
       Ctrl
     ]);
 
-  function Ctrl($http, $timeout, FileUploader, chatservice) {
+  function Ctrl($http, $timeout, $rootScope, FileUploader, chatservice) {
     var self = this;
 
     self.uploader = new FileUploader();
@@ -18,16 +19,8 @@
     var storageRef = chatservice.storageRef;
     var database = chatservice.database;
     self.currentUser = chatservice.currentUser;
-    self.activeRoomKey = '';
-
-    $timeout(function(){
-      chatservice.getChatRoom().then(function(result) {
-        self.activeRoomKey = result.key;
-      });
-    },0);
 
     self.saveMessage = function (message) {
-
       var currentUser = self.currentUser;
       var textfield = $('#summernote');
       messageInput = textfield.summernote('code');
@@ -43,7 +36,7 @@
         // Add a new message entry to the Firebase Database.
         //UTC
         var milliseconds = Math.floor((new Date()).getTime() / 1000);
-        this.messagesRef = database.ref('rooms/'+self.activeRoomKey+'/messages');
+        this.messagesRef = database.ref('rooms/'+$rootScope.activeChatKey+'/messages');
         this.messagesRef.push({
           userid: currentUser.uid,
           name: currentUser.displayName,
@@ -64,7 +57,7 @@
     function writeUserData(userId, filename, size, downloadUrl, lastModified) {
       //fancy hashing algorithm goes here for name
       var encodedData = window.btoa(filename);
-      var newRef = database.ref(self.activeRoomKey+'/uploads/' + userId).child(encodedData);
+      var newRef = database.ref('rooms/'+$rootScope.activeChatKey+'/uploads/' + userId).child(encodedData);
       newRef.set({
         name: filename,
         size: size,
@@ -87,7 +80,7 @@
       var vm = this;
       var file = value._file;
       
-      storageRef.child(self.activeRoom+'/user/'+ currentUser.uid + '/' + hash).put(file).then(function (snapshot) {
+      storageRef.child($rootScope.activeChatKey+'/user/'+ currentUser.uid + '/' + hash).put(file).then(function (snapshot) {
 
         var downloadURL = snapshot.downloadURL;
         item.isSuccess = true;

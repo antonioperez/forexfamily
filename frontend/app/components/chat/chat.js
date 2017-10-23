@@ -4,11 +4,11 @@
         .module('app')
         .controller('ChatRoomCtrl', [
           '$http',
-          '$scope', '$timeout', 'chatservice',
+          '$rootScope', '$timeout', 'chatservice',
           Ctrl
         ]);
     
-        function Ctrl ($http, $scope, $timeout, chatservice) {
+        function Ctrl ($http, $rootScope, $timeout, chatservice) {
           var self = this;
           var auth = chatservice.auth;
           var storageRef = chatservice.storageRef;
@@ -19,6 +19,7 @@
           $timeout(function(){
             chatservice.getChatRoom().then(function(result) {
               self.activeRoom = result;
+              $rootScope.activeChatKey = result.key
               self.loadRooms();
             });
           },0);
@@ -43,6 +44,13 @@
             this.roomsRef.limitToLast(loadLimit).on('child_changed', setRooms);
             this.roomsRef.limitToLast(loadLimit).on('child_removed', setRooms);
             
+          }
+
+          self.changeRooms = function(room) {
+            chatservice.getChatRoom(room).then(function(result) {
+              self.activeRoom = result;
+              $rootScope.activeChatKey = result.key;              
+            });
           }
         }
     })();

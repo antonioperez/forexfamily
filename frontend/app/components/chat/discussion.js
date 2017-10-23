@@ -4,11 +4,11 @@
     .module('app')
     .controller('ChatCtrl', [
       '$http',
-      '$scope', '$timeout', 'chatservice',
+      '$rootScope', '$timeout', 'chatservice',
       Ctrl
     ]);
 
-    function Ctrl ($http, $scope, $timeout, chatservice) {
+    function Ctrl ($http, $rootScope, $timeout, chatservice) {
       var self = this;
       var auth = chatservice.auth;
       var storageRef = chatservice.storageRef;
@@ -17,10 +17,8 @@
       self.currentUser = database.currentUser;
       self.messages = {};
 
-      self.activeRoomKey = '';
       $timeout(function(){
         chatservice.getChatRoom().then(function(result) {
-          self.activeRoomKey = result.key; 
           self.loadMessages();         
         });
       },0);
@@ -30,15 +28,15 @@
           var val = data.val();
           var key = data.key;
           self.messages[key] = val;
-          
         },0);
-        
       }
 
       self.loadMessages = function() {
         // Reference to the /messages/ database path.
         var loadLimit = 12;
-        this.messagesRef = database.ref('rooms/'+self.activeRoomKey+'/messages');
+        console.log("message");
+        console.log($rootScope.activeChatKey)
+        this.messagesRef = database.ref('rooms/'+$rootScope.activeChatKey+'/messages');
         this.messagesRef.off();
         // Loads the last x messages and listen for new/edited ones.
         this.messagesRef.limitToLast(loadLimit).on('child_added', setMessage);
@@ -46,6 +44,11 @@
         this.messagesRef.limitToLast(loadLimit).on('child_removed', setMessage);
         
       }
+
+      $rootScope.$watch('activeChatKey', function () {
+        self.messages = {};
+        self.loadMessages();    
+      })
     }
 
 })();

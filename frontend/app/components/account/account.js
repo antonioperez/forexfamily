@@ -59,7 +59,7 @@
                         displayName : username
                     }) 
 
-                    self.database.ref('users/' + user.uid).set({
+                    self.database.ref('user/' + user.uid).set({
                         online : true, 
                         username : username,
                         likes : 0
@@ -146,7 +146,7 @@
 
         $scope.signOut = function () {
             if (auth.currentUser) {
-                self.database.ref('users/' + auth.currentUser.uid).update({
+                self.database.ref('user/' + auth.currentUser.uid).update({
                     online : false
                 })
                 auth.signOut();
