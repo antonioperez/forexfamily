@@ -34,8 +34,6 @@
       self.loadMessages = function() {
         // Reference to the /messages/ database path.
         var loadLimit = 12;
-        console.log("message");
-        console.log($rootScope.activeChatKey)
         this.messagesRef = database.ref('rooms/'+$rootScope.activeChatKey+'/messages');
         this.messagesRef.off();
         // Loads the last x messages and listen for new/edited ones.
