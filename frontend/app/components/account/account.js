@@ -89,6 +89,8 @@
             auth.signInWithPopup(provider).then(function(user) {
                 console.log("Logged in as: " + user.uid);
             }, function(error) {
+                var errorMessage = error.message;
+                $scope.errorMessage = errorMessage;
                 console.error("Login failed: " + error);
             });
         }
