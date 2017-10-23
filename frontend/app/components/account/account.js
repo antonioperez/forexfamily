@@ -55,10 +55,14 @@
                 .then(function (user) {
                     sendEmailVerification();
                     $cookies.put('user', user);
+                    if(!username) {
+                        username = user.displayName
+                    }
+        
                     user.updateProfile({
                         displayName : username
                     }) 
-
+        
                     self.database.ref('user/' + user.uid).set({
                         online : true, 
                         username : username,
@@ -87,11 +91,19 @@
             }
 
             auth.signInWithPopup(provider).then(function(user) {
-                console.log("Logged in as: " + user.uid);
+                user = user.user;
+                sendEmailVerification();
+                $cookies.put('user', user);
+                self.database.ref('user/' + user.uid).set({
+                    online : true, 
+                    username : user.displayName,
+                    likes : 0
+                }) 
+                $state.go('index.chat');
             }, function(error) {
                 var errorMessage = error.message;
                 $scope.errorMessage = errorMessage;
-                console.error("Login failed: " + error);
+                console.error("Login failed: " + error.code);
             });
         }
 
