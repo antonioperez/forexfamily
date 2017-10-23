@@ -92,7 +92,6 @@
 
             auth.signInWithPopup(provider).then(function(user) {
                 user = user.user;
-                sendEmailVerification();
                 $cookies.put('user', user);
                 self.database.ref('user/' + user.uid).set({
                     online : true, 
