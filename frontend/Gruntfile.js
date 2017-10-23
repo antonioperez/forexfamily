@@ -48,6 +48,18 @@ module.exports = function (grunt) {
                 }
             }
         },
+
+        concat: {
+            css: {
+                src: ["<%= inspinia.app %>/styles/style.css"],
+                dest: '<%= inspinia.dist %>/styles/style.css',
+            },
+            js: {
+                files : {
+                    '<%= inspinia.dist %>/scripts/scripts.js': ['<%= inspinia.app %>/components/{,*/}*.js']
+                }
+            }
+        },
         // Compile less to css
         less: {
             development: {
@@ -93,6 +105,16 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 mangle: false
+            },
+            js: {
+                files: {
+                    '<%= inspinia.dist %>/scripts/scripts.js': ['<%= inspinia.dist %>/scripts/scripts.js']
+                }
+              },
+            vendor: {
+                files: {
+                    '<%= inspinia.dist %>/scripts/vendor.js': ['.tmp/concat/scripts/vendor.js']
+                }
             }
         },
         // Clean dist folder
@@ -112,8 +134,7 @@ module.exports = function (grunt) {
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
-                files: [
-                    {
+                files: [{
                         expand: true,
                         dot: true,
                         cwd: '<%= inspinia.app %>',
@@ -195,7 +216,7 @@ module.exports = function (grunt) {
         filerev: {
             dist: {
                 src: [
-                    '<%= inspinia.dist %>/components/{,*/}*.js',
+                    '<%= inspinia.dist %>/scripts/{,*/}*.js',
                     '<%= inspinia.dist %>/styles/{,*/}*.css',
                     '<%= inspinia.dist %>/styles/fonts/*'
                 ]
@@ -251,7 +272,8 @@ module.exports = function (grunt) {
         'concat',
         'copy:dist',
         'cssmin',
-        'uglify',
+        'uglify:js',
+        'uglify:vendor',
         'filerev',
         'usemin',
         'htmlmin'
