@@ -48,6 +48,7 @@ module.exports = function (grunt) {
                 }
             }
         },
+
         // Compile less to css
         less: {
             development: {
@@ -112,8 +113,7 @@ module.exports = function (grunt) {
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
-                files: [
-                    {
+                files: [{
                         expand: true,
                         dot: true,
                         cwd: '<%= inspinia.app %>',
@@ -195,7 +195,7 @@ module.exports = function (grunt) {
         filerev: {
             dist: {
                 src: [
-                    '<%= inspinia.dist %>/components/{,*/}*.js',
+                    '<%= inspinia.dist %>/scripts/{,*/}*.js',
                     '<%= inspinia.dist %>/styles/{,*/}*.css',
                     '<%= inspinia.dist %>/styles/fonts/*'
                 ]
