@@ -1,6 +1,6 @@
 <div class="" ng-controller="ChatRoomCtrl as chatRoom">
   <nav class="navbar navbar-static-top white-bg m-b-0 " role="navigation">
-    <div class="col-xs-6">
+    
       <span minimaliza-sidebar></span>
       <ul class="nav navbar-top-links pull-left " uib-dropdown>
         <li uib-dropdown-toggle>
@@ -14,12 +14,12 @@
             </li>
         </ul>
       </ul>   
-    </div>
-    <div class="col-xs-6">
+  
+   
       <ul class="nav navbar-top-links pull-right" uib-dropdown>
         <li uib-dropdown-toggle>
-          <img class="message-avatar" ng-show="chatRoom.currentUser.photoURL" ng-src="{{chatRoom.currentUser.photoURL}}" alt="">
-          <a >
+          <a>
+            <img class="message-avatar" ng-show="chatRoom.currentUser.photoURL" ng-src="{{chatRoom.currentUser.photoURL}}" alt="">     
             {{chatRoom.currentUser.displayName}} <i class="logout-dropdown icon ion-chevron-down"></i>
           </a>
         </li>
@@ -30,7 +30,7 @@
             <li ng-controller="AccountCtrl"><a ng-click="signOut()">Logout</a></li>
         </ul>
       </ul>
-    </div>
+   
   </nav>
 </div>
 <div class="row" data-ng-hide="true">
