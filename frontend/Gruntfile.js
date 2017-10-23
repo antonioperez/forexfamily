@@ -49,17 +49,6 @@ module.exports = function (grunt) {
             }
         },
 
-        concat: {
-            css: {
-                src: ["<%= inspinia.app %>/styles/style.css"],
-                dest: '<%= inspinia.dist %>/styles/style.css',
-            },
-            js: {
-                files : {
-                    '<%= inspinia.dist %>/scripts/scripts.js': ['<%= inspinia.app %>/components/{,*/}*.js']
-                }
-            }
-        },
         // Compile less to css
         less: {
             development: {
@@ -105,16 +94,6 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 mangle: false
-            },
-            js: {
-                files: {
-                    '<%= inspinia.dist %>/scripts/scripts.js': ['<%= inspinia.dist %>/scripts/scripts.js']
-                }
-              },
-            vendor: {
-                files: {
-                    '<%= inspinia.dist %>/scripts/vendor.js': ['.tmp/concat/scripts/vendor.js']
-                }
             }
         },
         // Clean dist folder
@@ -272,8 +251,7 @@ module.exports = function (grunt) {
         'concat',
         'copy:dist',
         'cssmin',
-        'uglify:js',
-        'uglify:vendor',
+        'uglify',
         'filerev',
         'usemin',
         'htmlmin'
