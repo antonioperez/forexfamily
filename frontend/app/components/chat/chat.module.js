@@ -7,14 +7,15 @@
   function config($stateProvider) {
     $stateProvider
       .state('index.chat', {
-        controller: 'ChatCtrl',
-        controllerAs: 'chat',
+        controller: 'ChatRoomCtrl',
+        controllerAs: 'chatroom',
         data: {
           pageTitle: 'Chat'
         },
         resolve: {
           loadPlugin: [ '$ocLazyLoad', function ($ocLazyLoad) {
             return $ocLazyLoad.load([
+ 
               {
                 name: 'angles',
                 files: ['js/plugins/chartJs/angles.js']

@@ -14,8 +14,15 @@
           var storageRef = chatservice.storageRef;
           var database = chatservice.database;
           self.currentUser = chatservice.currentUser;
-          self.activeRoom = chatservice.getActiveChat();
-          
+          self.activeRoom = {};
+        
+          $timeout(function(){
+            chatservice.getChatRoom().then(function(result) {
+              self.activeRoom = result;
+              self.loadRooms();
+            });
+          },0);
+
           self.rooms = {};
           var setRooms = function(data) {
             $timeout(function(){
@@ -37,9 +44,5 @@
             this.roomsRef.limitToLast(loadLimit).on('child_removed', setRooms);
             
           }
-    
-          self.loadRooms();
-    
         }
-    
     })();

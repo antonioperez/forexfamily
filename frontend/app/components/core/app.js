@@ -9,8 +9,20 @@
     var self = this;
     var auth = firebase.auth();
 
-    self.currentUser = auth.currentUser;
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+          self.currentUser = user;
+      }
+    });
        
   }
 
+  angular.module('app')
+  .filter('capitalizeWord', function() {
+    return function(text) {
+      return (!!text) ? text.charAt(0).toUpperCase() + text.substr(1).toLowerCase() : '';
+    }
+  });
+
 })();
+

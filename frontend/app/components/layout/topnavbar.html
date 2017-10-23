@@ -5,12 +5,12 @@
       <ul class="nav navbar-top-links pull-left " uib-dropdown>
         <li uib-dropdown-toggle>
           <a class="">
-              {{chatRoom.activeRoom}} <i class="logout-dropdown icon ion-chevron-down"></i>
+              {{chatRoom.activeRoom.name | capitalizeWord}} <i class="logout-dropdown icon ion-chevron-down"></i>
           </a>
         </li>
         <ul uib-dropdown-menu class="animated fadeInRight m-t-xs" >
             <li data-ng-repeat="(key, room) in chatRoom.rooms">
-              <a ng-if="room.text !== chatRoom.activeRoom" ui-sref="index.chat">{{room.text}}</a>
+              <a ng-if="room.name !== chatRoom.activeRoom.name" ui-sref="index.chat">{{room.name}}</a>
             </li>
         </ul>
       </ul>   

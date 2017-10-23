@@ -15,6 +15,7 @@
           var database = chatservice.database;
 
           self.currentUser = chatservice.currentUser;
+          self.activeRoom = chatservice.getActiveChat();
           self.messages = {};
           self.users = {};
               
