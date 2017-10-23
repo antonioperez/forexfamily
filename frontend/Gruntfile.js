@@ -152,6 +152,13 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dot: true,
+                        cwd: 'bower_components/summernote',
+                        src: ['dist/font/*.*'],
+                        dest: '<%= inspinia.dist %>'
+                    },
+                    {
+                        expand: true,
+                        dot: true,
                         cwd: 'bower_components/bootstrap',
                         src: ['fonts/*.*'],
                         dest: '<%= inspinia.dist %>'
